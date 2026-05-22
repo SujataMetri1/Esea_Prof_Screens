@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)file:///C:/Users/Sai_Pavan_Laptop/Downloads/Proof_of_Delivery_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>eSEA Prof - Proof of Delivery</title>
+    <link href="file:///C:/Users/Sai_Pavan_Laptop/Downloads/Proof%20of%20Delivery_files/css2" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2B5A6E;
+            --primary-dark: #1F4A5A;
+            --secondary: #4A90A4;
+            --accent: #FF9500;
+            --error: #E74C3C;
+            --text-dark: #1A1A1A;
+            --text-gray: #666666;
+            --text-light: #999999;
+            --border: #CCCCCC;
+            --bg-light: #F5F5F5;
+            --bg-white: #FFFFFF;
+            --input-bg: #E8F0F5;
+            --button-primary: #2B5A6E;
+            --button-text: #FFFFFF;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* Sidebar Styling */
+        .app-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: var(--bg-light);
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            position: relative;
+        }
+        
+        .main-wrapper.card-mode {
+            align-items: center;
+            justify-content: center;
+            width: 100% !important;
+            margin-left: 0 !important;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #1A3A5C;
+            color: white;
+            padding: 24px 0;
+            position: fixed;
+            height: calc(100vh - 60px);
+            left: 0;
+            top: 60px;
+            overflow-y: auto;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+            z-index: 99;
+            display: none;
+        }
+
+        .sidebar.show {
+            display: block;
+        }
+        
+        .main-wrapper.card-mode .sidebar {
+            display: none !important;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .sidebar-header {
+            padding: 0 20px 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            border-left: 4px solid transparent;
+            margin: 0 12px;
+            border-radius: 8px;
+            user-select: none;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: rgba(255, 165, 0, 0.5);
+        }
+
+        .sidebar-item.active {
+            background: rgba(255, 165, 0, 0.15);
+            color: #FF9500;
+            border-left-color: #FF9500;
+            font-weight: 600;
+        }
+
+        .sidebar-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            width: 22px;
+            text-align: center;
+        }
+
+        .sidebar-label {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 0;
+            background: #F5F5F5;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+        }
+
+        .main-content.with-sidebar {
+            margin-left: 220px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-content.card-mode {
+            background: linear-gradient(135deg, #F0F5F9 0%, #F5F8FB 50%, #FFFFFF 100%);
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 60px);
+            padding: 40px 20px;
+            margin: 0 !important;
+            margin-left: 0 !important;
+            width: 100% !important;
+            flex: 1 !important;
+            position: relative;
+        }
+
+        /* Responsive Sidebar */
+
+        /* Header Navigation */
+        .app-header {
+            background: linear-gradient(135deg, #2B5A6E 0%, #1F4A5A 100%);
+            color: white;
+            padding: 12px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(43, 90, 110, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text svg {
+            height: 50px;
+            width: auto;
+        }
+
+        .header-right {
+            display: none;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-right.show {
+            display: flex;
+        }
+
+        .user-info {
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .user-info div:first-child {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .user-info div:last-child {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-container {
+            flex: 1;
+            width: 100%;
+            padding: 32px 42px;
+            background: #FFFFFF;
+            position: relative;
+            overflow: visible;
+            margin: 18px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-wrapper .main-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Phone Screen Specific Styling */
+        .phone-card {
+            max-width: 450px !important;
+            margin: 0 auto !important;
+            padding: 50px 40px !important;
+            border-radius: 20px !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .phone-header {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .company-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 38px;
+        }
+
+        .company-logo svg {
+            height: auto;
+            width: 100%;
+            max-width: 220px;
+        }
+
+        /* Logistics Icons (for other screens) */
+
+        .phone-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A1A1A;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        /* Phone Card Specific Styling */
+        .phone-card {
+            max-width: 500px;
+            width: 100%;
+            padding: 56px 48px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            background: #FFFFFF;
+            animation: slideUp 0.4s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .phone-input-group {
+            display: flex;
+            gap: 0;
+            margin-bottom: 32px;
+            border: 2px solid #BFC9D4;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #D9E5F0;
+        }
+
+        .country-code {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 16px;
+            background: #BFC9D4;
+            color: #1A1A1A;
+            font-weight: 600;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .dropdown-arrow {
+            font-size: 12px;
+        }
+
+        .phone-input {
+            flex: 1;
+            padding: 16px 16px;
+            border: none;
+            background: #D9E5F0;
+            color: #1A1A1A;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+        }
+
+        .phone-input::placeholder {
+            color: #666666;
+        }
+
+        .btn-phone-primary {
+            width: 100%;
+            padding: 18px 32px;
+            background: #2B5A6E;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            margin-top: 8px;
+        }
+
+        .btn-phone-primary:hover {
+            background: #1F4A5A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(43, 90, 110, 0.3);
+        }
+
+        .btn-phone-primary:active {
+            background: #15394A;
+            transform: translateY(0);
+        }
+
+        /* Phone and OTP Screens - Increased Spacing */
+        #phoneScreen .form-container,
+        #otpScreen .form-container {
+            padding: 56px 48px !important;
+            margin: 20px !important;
+        }
+
+        #phoneScreen .phone-title,
+        #otpScreen .phone-title {
+            margin-bottom: 40px !important;
+        }
+
+        #phoneScreen .btn-group,
+        #otpScreen .btn-group {
+            margin-top: 38px !important;
+        }
+        
+        #phoneScreen .phone-input-group,
+        #otpScreen .phone-input-group {
+            margin-bottom: 32px !important;
+        }
+        
+        #phoneScreen .phone-header,
+        #otpScreen .phone-header {
+            margin-bottom: 48px !important;
+        }
+
+        .btn-phone-secondary {
+            width: 100%;
+            padding: 14px 32px;
+            background: #FFFFFF;
+            color: #2B5A6E;
+            border: 2px solid #2B5A6E;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            margin-top: 12px;
+        }
+
+        .btn-phone-secondary:hover {
+            background: #F5F5F5;
+            color: #1F4A5A;
+            border-color: #1F4A5A;
+        }
+
+        /* Card Mode Styling */
+        .main-container.card-mode {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 40px 20px;
+            background: transparent;
+            min-height: 100%;
+            margin: 0 !important;
+            width: 100% !important;
+        }
+
+        .main-container.card-mode .content-wrapper {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* Phone and OTP Screens - Card Mode */
+        #phoneScreen .main-container,
+        #otpScreen .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: transparent;
+        }
+
+        .content-wrapper {
+            max-width: 100%;
+            margin: 0;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Validation Feedback */
+        .validation-message {
+            text-align: center;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .validation-message.error {
+            display: block;
+            background: rgba(231, 76, 60, 0.1);
+            color: #E74C3C;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        .validation-message.success {
+            display: block;
+            background: rgba(74, 144, 164, 0.1);
+            color: #4A90A4;
+            border: 1px solid rgba(74, 144, 164, 0.2);
+        }
+
+        /* Screen Transitions */
+        .screen {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Center Phone & OTP Screens */
+        #phoneScreen.active,
+        #otpScreen.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 60px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Page Title & Description */
+        .page-header {
+            margin-bottom: 38px;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #1A1A1A;
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #666666;
+            font-weight: 400;
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 36px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            border: none;
+            margin-bottom: 0;
+        }
+
+        /* Card Style for Phone & OTP Screens */
+        #phoneScreen .form-container,
+        #otpScreen .form-container {
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            padding: 50px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #E0E0E0;
+        }
+
+        #phoneScreen .page-header,
+        #otpScreen .page-header {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        #phoneScreen .page-title,
+        #otpScreen .page-title {
+            font-size: 32px;
+        }
+
+        #phoneScreen .page-subtitle,
+        #otpScreen .page-subtitle {
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 32px;
+        }
+
+        .form-group.half {
+            width: calc(50% - 14px);
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .form-group.half:nth-child(odd) {
+            margin-right: 28px;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: block;
+        }
+
+        .form-input, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #D0D0D0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background: #F8F8F8;
+            color: #1A1A1A;
+        }
+
+        .form-input:focus, textarea:focus {
+            outline: none;
+            border-color: #2B5A6E;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(43, 90, 110, 0.1);
+        }
+
+        .form-input::placeholder, textarea::placeholder {
+            color: #999999;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Button Styles */
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 38px;
+            justify-content: flex-start;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .btn-primary {
+            background: #2B5A6E;
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(43, 90, 110, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #1F4A5A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(43, 90, 110, 0.3);
+        }
+
+        .btn-primary:active {
+            background: #15394A;
+            box-shadow: 0 1px 4px rgba(43, 90, 110, 0.2);
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #2B5A6E;
+            border: 1.5px solid #2B5A6E;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+            border-color: #1F4A5A;
+            color: #1F4A5A;
+            transform: translateY(-2px);
+        }
+
+        /* OTP Input Styles */
+        .otp-boxes {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .otp-box {
+            width: 65px;
+            height: 65px;
+            font-size: 26px;
+            text-align: center;
+            border: 2px solid #BFC9D4;
+            border-radius: 10px;
+            font-weight: 700;
+            padding: 10px;
+            transition: all 0.3s ease;
+            background: #D9E5F0;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .otp-box:focus {
+            outline: none;
+            border-color: #2B5A6E;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(43, 90, 110, 0.1);
+            transform: scale(1.05);
+        }
+
+        .timer-text {
+            font-size: 13px;
+            color: #666666;
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        .resend-link {
+            font-size: 13px;
+            margin-bottom: 38px;
+            color: #666666;
+        }
+
+        .resend-link a {
+            color: #2B5A6E;
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .resend-link a:hover {
+            border-bottom-color: #2B5A6E;
+        }
+
+        /* Dashboard/Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 38px;
+            margin-top: 0;
+        }
+
+        .stat-card {
+            padding: 32px 24px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.stat-card-primary {
+            background: linear-gradient(135deg, #2b5a6e 0%, #1f4a5a 100%);
+            color: white;
+        }
+
+        .stat-card.stat-card-secondary {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            color: #1a1a1a;
+        }
+
+        .stat-card.stat-card-warning {
+            background: #fffef5;
+            border: 2px solid #ffc107;
+            color: #1a1a1a;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ff9500;
+        }
+
+        .stat-card.stat-card-secondary .stat-value,
+        .stat-card.stat-card-warning .stat-value {
+            color: #ff9500;
+        }
+
+        .stat-button {
+            width: 100%;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.stat-card-primary .stat-button {
+            background-color: #ff9500;
+            color: white;
+        }
+
+        .stat-card.stat-card-primary .stat-button:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+        }
+
+        .stat-card.stat-card-secondary .stat-button,
+        .stat-card.stat-card-warning .stat-button {
+            background-color: #2b5a6e;
+            color: white;
+        }
+
+        .stat-card.stat-card-secondary .stat-button:hover,
+        .stat-card.stat-card-warning .stat-button:hover {
+            background-color: #1f4a5a;
+            transform: translateY(-2px);
+        }
+
+        .submissions-section {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-top: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+        }
+
+        .submissions-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .submissions-table thead {
+            background-color: #f5f5f5;
+        }
+
+        .submissions-table th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #666666;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .submissions-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .submissions-table tr:hover {
+            background-color: #fafafa;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-in-progress {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-pending {
+            background-color: #fff8e1;
+            color: #d4a520;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .action-btn {
+            padding: 14px 20px;
+            border: 1.5px solid #2b5a6e;
+            background: white;
+            color: #2b5a6e;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            background-color: #2b5a6e;
+            color: white;
+        }
+
+        .stat-card.green {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F0;
+        }
+
+        .stat-card.orange {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F0;
+        }
+
+        .stat-card.green .stat-value {
+            color: #2B5A6E;
+        }
+
+        .stat-card.orange .stat-value {
+            color: #FF9500;
+        }
+
+        /* Scanner & Photo Section */
+        .scanner-box {
+            background: linear-gradient(135deg, #F0F5F9 0%, #E8F0F5 100%);
+            border: 2px dashed #D0D0D0;
+            border-radius: 12px;
+            padding: 55px 45px;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 48px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scanner-box:hover {
+            background: linear-gradient(135deg, #E8F0F5 0%, #D0E0F0 100%);
+            border-color: #2B5A6E;
+        }
+
+        .scan-text {
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-top: 16px;
+            font-weight: 600;
+        }
+
+        .error-text {
+            font-size: 13px;
+            color: var(--error);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+        }
+
+        .photo-section {
+            margin: 40px 0;
+        }
+
+        .photo-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .photo-label span {
+            color: var(--secondary);
+            font-size: 18px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+        }
+
+        .photo-box {
+            background: var(--bg-light);
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .photo-box:hover {
+            background: var(--bg-white);
+            border-color: var(--primary);
+        }
+
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 32px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .data-table thead {
+            background: var(--bg-light);
+            border-bottom: 2px solid var(--border);
+        }
+
+        .data-table th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-gray);
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--bg-light);
+        }
+
+        /* Badge Styles */
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge.success {
+            background: rgba(74, 144, 164, 0.15);
+            color: #4A90A4;
+        }
+
+        .badge.pending {
+            background: rgba(255, 149, 0, 0.15);
+            color: #FF9500;
+        }
+
+        .badge.error {
+            background: rgba(231, 76, 60, 0.15);
+            color: #E74C3C;
+        }
+
+        /* Button Small */
+        .btn-small {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-small:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-small.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-small.danger {
+            background: var(--error);
+            color: white;
+        }
+
+        /* Detail Grid */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+            padding: 24px;
+            background: var(--bg-light);
+            border-radius: 12px;
+        }
+
+        .detail-item label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .detail-item p {
+            font-size: 16px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .remarks-text {
+            font-size: 16px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            padding: 16px;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        /* Analytics Grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .analytics-card {
+            background: linear-gradient(135deg, var(--input-bg) 0%, rgba(43, 90, 110, 0.05) 100%);
+            padding: 28px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .analytics-label {
+            font-size: 13px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .analytics-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .analytics-change {
+            font-size: 12px;
+            color: #4A90A4;
+            font-weight: 600;
+        }
+
+        /* Status Chips */
+        .status-chips {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            padding: 10px 18px;
+            border: 2px solid var(--border);
+            background: var(--bg-white);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .chip:hover {
+            border-color: var(--primary);
+            background: rgba(43, 90, 110, 0.05);
+        }
+
+        .chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Pending Items */
+        .pending-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .pending-item {
+            padding: 20px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .pending-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .pending-id {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
+        .pending-time {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .pending-detail {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin: 6px 0;
+        }
+
+        .pending-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        /* Device Info */
+        .device-info {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+
+        .device-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .device-info p {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin: 6px 0;
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 180px;
+                position: fixed;
+                height: calc(100vh - 60px);
+                left: -180px;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .main-wrapper {
+                position: relative;
+            }
+
+            .sidebar-label {
+                font-size: 13px;
+            }
+
+            .sidebar-item {
+                padding: 12px 16px;
+                margin: 0 8px;
+                font-size: 13px;
+            }
+
+            .sidebar-icon {
+                font-size: 16px;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .app-header {
+                padding: 16px 20px;
+            }
+
+            .main-container {
+                padding: 40px 20px;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .form-container {
+                padding: 32px 24px;
+                border-radius: 12px;
+            }
+
+            .form-group.half {
+                width: 100%;
+                display: block;
+                margin-right: 0 !important;
+                margin-bottom: 32px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .otp-boxes {
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .otp-box {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-right {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .user-info {
+                text-align: left;
+            }
+
+            .submissions-table {
+                font-size: 12px;
+            }
+
+            .submissions-table th,
+            .submissions-table td {
+                padding: 12px 8px;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+        }
+
+        /* Accessibility */
+        .form-input::placeholder,
+        textarea::placeholder {
+            color: var(--text-light);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Background Effects */
+        .main-container::before {
+            content: '';
+            position: fixed;
+            top: 80px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(26, 82, 118, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .main-container::after {
+            content: '';
+            position: fixed;
+            bottom: -150px;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 168, 107, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Card mode background decorations */
+        .main-container.card-mode::before {
+            top: -100px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="50" cy="50" r="40" fill="%232B5A6E" opacity="0.08"/><circle cx="150" cy="100" r="50" fill="%234A90A4" opacity="0.08"/><rect x="20" y="120" width="60" height="60" fill="%23FF9500" opacity="0.05" rx="10"/></svg>') no-repeat;
+            background-size: contain;
+        }
+
+        .main-container.card-mode::after {
+            bottom: -150px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M10,100 Q50,50 100,100 T190,100" stroke="%232B5A6E" stroke-width="3" fill="none" opacity="0.08"/><circle cx="30" cy="140" r="20" fill="%234A90A4" opacity="0.08"/><polygon points="150,80 180,140 120,140" fill="%23FF9500" opacity="0.05"/></svg>') no-repeat;
+            background-size: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-section">
+                <div class="logo-text">
+                    <svg width="200" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Globe with arrow -->
+                        <g transform="translate(5, 8)">
+                            <!-- Outer circle -->
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="#1A3A5C" stroke-width="1.2"></circle>
+                            
+                            <!-- Globe lines -->
+                            <circle cx="12" cy="12" r="8" fill="none" stroke="#1A3A5C" stroke-width="0.8" opacity="0.7"></circle>
+                            
+                            <!-- Horizontal line (equator) -->
+                            <line x1="4" y1="12" x2="20" y2="12" stroke="#1A3A5C" stroke-width="0.8" opacity="0.7"></line>
+                            
+                            <!-- Vertical line (meridian) -->
+                            <line x1="12" y1="4" x2="12" y2="20" stroke="#1A3A5C" stroke-width="0.8" opacity="0.7"></line>
+                            
+                            <!-- Curved lines for grid effect -->
+                            <path d="M 12 4 Q 18 8 18 12 Q 18 16 12 20" fill="none" stroke="#1A3A5C" stroke-width="0.8" opacity="0.7"></path>
+                            <path d="M 12 4 Q 6 8 6 12 Q 6 16 12 20" fill="none" stroke="#1A3A5C" stroke-width="0.8" opacity="0.7"></path>
+                            
+                            <!-- Arrow pointer -->
+                            <g transform="translate(18, 5)">
+                                <path d="M 0 0 L 5 -1.5 L 4 0 L 5 1.5 Z" fill="#1A3A5C"></path>
+                                <line x1="0" y1="0" x2="5" y2="-4" stroke="#1A3A5C" stroke-width="0.9"></line>
+                            </g>
+                        </g>
+                        
+                        <!-- eSEA Text -->
+                        <text x="50" y="24" font-family="&#39;Poppins&#39;, sans-serif" font-size="18" font-weight="700" fill="#1A3A5C">eSEA</text>
+                        
+                        <!-- PROOF Text in Orange -->
+                        <text x="105" y="24" font-family="&#39;Inter&#39;, sans-serif" font-size="14" font-weight="700" fill="#FF9500">PROOF</text>
+                    </svg>
+                </div>
+            </div>
+            <div class="header-right" id="headerRight">
+                <div class="user-info">
+                    <div>Welcome Back!</div>
+                    <div>Delivery Partner</div>
+                </div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <div class="main-wrapper card-mode">
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-title">Menu</div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li>
+                        <div class="sidebar-item active" onclick="goToScreen(&#39;dashboardScreen&#39;); setActiveMenu(this)">
+                            <span class="sidebar-icon">📦</span>
+                            <span class="sidebar-label">Pickup</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sidebar-item" onclick="goToScreen(&#39;deliveryScreen&#39;); setActiveMenu(this)">
+                            <span class="sidebar-icon">🚚</span>
+                            <span class="sidebar-label">Delivery</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sidebar-item" onclick="goToScreen(&#39;dailySubmissionsScreen&#39;); setActiveMenu(this)">
+                            <span class="sidebar-icon">📄</span>
+                            <span class="sidebar-label">Submissions</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sidebar-item" onclick="goToScreen(&#39;analyticsScreen&#39;); setActiveMenu(this)">
+                            <span class="sidebar-icon">📈</span>
+                            <span class="sidebar-label">Analytics</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sidebar-item" onclick="goToScreen(&#39;barcodeSearchScreen&#39;); setActiveMenu(this)">
+                            <span class="sidebar-icon">🔍</span>
+                            <span class="sidebar-label">Search</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sidebar-item" onclick="goToScreen(&#39;pendingSubmissionsScreen&#39;); setActiveMenu(this)">
+                            <span class="sidebar-icon">⏳</span>
+                            <span class="sidebar-label">Pending</span>
+                        </div>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content card-mode">
+            <div class="content-wrapper">
+                <!-- Screen 1: Phone Login -->
+                <div class="screen active" id="phoneScreen">
+                    <div class="form-container phone-card">
+                        <div class="phone-header">
+                            <div class="company-logo">
+                                <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Globe with arrow -->
+                                    <g transform="translate(15, 20)">
+                                        <!-- Outer circle -->
+                                        <circle cx="16" cy="16" r="14" fill="none" stroke="#2B5A6E" stroke-width="1.5"></circle>
+                                        
+                                        <!-- Globe lines -->
+                                        <circle cx="16" cy="16" r="11" fill="none" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></circle>
+                                        
+                                        <!-- Horizontal line (equator) -->
+                                        <line x1="5" y1="16" x2="27" y2="16" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></line>
+                                        
+                                        <!-- Vertical line (meridian) -->
+                                        <line x1="16" y1="5" x2="16" y2="27" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></line>
+                                        
+                                        <!-- Curved lines for grid effect -->
+                                        <path d="M 16 5 Q 22 10 22 16 Q 22 22 16 27" fill="none" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></path>
+                                        <path d="M 16 5 Q 10 10 10 16 Q 10 22 16 27" fill="none" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></path>
+                                        
+                                        <!-- Arrow pointer -->
+                                        <g transform="translate(22, 8)">
+                                            <path d="M 0 0 L 7 -2 L 5 0 L 7 2 Z" fill="#2B5A6E"></path>
+                                            <line x1="0" y1="0" x2="7" y2="-5" stroke="#2B5A6E" stroke-width="1.2"></line>
+                                        </g>
+                                    </g>
+                                    
+                                    <!-- Company Name -->
+                                    <text x="75" y="40" font-family="&#39;Poppins&#39;, sans-serif" font-size="24" font-weight="700" fill="#2B5A6E">MARINETRANS</text>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="phone-title">Please Enter your Mobile Number to Login/Sign Up</div>
+                        
+                        <form onsubmit="goToOTP(event)">
+                            <div class="phone-input-group">
+                                <div class="country-code">
+                                    <span>+91</span>
+                                    <span class="dropdown-arrow">▼</span>
+                                </div>
+                                <input type="tel" class="phone-input" id="phoneInput" placeholder="Phone Number" maxlength="10">
+                            </div>
+                            <button type="submit" class="btn-phone-primary">Send verification code</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Screen 2: OTP -->
+                <div class="screen" id="otpScreen">
+                    <div class="form-container phone-card">
+                        <div class="phone-header">
+                            <div class="company-logo">
+                                <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Globe with arrow -->
+                                    <g transform="translate(15, 20)">
+                                        <!-- Outer circle -->
+                                        <circle cx="16" cy="16" r="14" fill="none" stroke="#2B5A6E" stroke-width="1.5"></circle>
+                                        
+                                        <!-- Globe lines -->
+                                        <circle cx="16" cy="16" r="11" fill="none" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></circle>
+                                        
+                                        <!-- Horizontal line (equator) -->
+                                        <line x1="5" y1="16" x2="27" y2="16" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></line>
+                                        
+                                        <!-- Vertical line (meridian) -->
+                                        <line x1="16" y1="5" x2="16" y2="27" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></line>
+                                        
+                                        <!-- Curved lines for grid effect -->
+                                        <path d="M 16 5 Q 22 10 22 16 Q 22 22 16 27" fill="none" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></path>
+                                        <path d="M 16 5 Q 10 10 10 16 Q 10 22 16 27" fill="none" stroke="#2B5A6E" stroke-width="1" opacity="0.6"></path>
+                                        
+                                        <!-- Arrow pointer -->
+                                        <g transform="translate(22, 8)">
+                                            <path d="M 0 0 L 7 -2 L 5 0 L 7 2 Z" fill="#2B5A6E"></path>
+                                            <line x1="0" y1="0" x2="7" y2="-5" stroke="#2B5A6E" stroke-width="1.2"></line>
+                                        </g>
+                                    </g>
+                                    
+                                    <!-- Company Name -->
+                                    <text x="75" y="40" font-family="&#39;Poppins&#39;, sans-serif" font-size="24" font-weight="700" fill="#2B5A6E">MARINETRANS</text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="phone-title">Enter Verification Code</div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" style="text-align: center;">Code</label>
+                            <div class="otp-boxes" id="otpBoxes">
+                                <input type="text" class="otp-box" maxlength="1" inputmode="numeric" value="1">
+                                <input type="text" class="otp-box" maxlength="1" inputmode="numeric" value="2">
+                                <input type="text" class="otp-box" maxlength="1" inputmode="numeric" value="3">
+                                <input type="text" class="otp-box" maxlength="1" inputmode="numeric" value="4">
+                            </div>
+                        </div>
+                        <div class="timer-text" style="text-align: center;">Resend code in <strong id="timer">45</strong>s</div>
+                        <div class="resend-link" style="text-align: center;">Didn't receive? <a onclick="resendOTP(event)">Resend</a></div>
+                        <div class="btn-group" style="flex-direction: column;">
+                            <button class="btn-phone-primary" onclick="verifyOTP()">Verify &amp; Continue</button>
+                            <button class="btn-phone-secondary" onclick="goToScreen(&#39;phoneScreen&#39;)">Change Number</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen" id="dashboardScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Dashboard</h1>
+                        <p class="page-subtitle">Your delivery operations</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="stats-grid">
+                            <div class="stat-card stat-card-primary">
+                                <div class="stat-icon">📦</div>
+                                <div class="stat-label">Today's Pickups</div>
+                                <div class="stat-value">12</div>
+                                <button class="stat-button" onclick="goToScreen(&#39;pickupScreen&#39;)">Start</button>
+                            </div>
+                            <div class="stat-card stat-card-secondary">
+                                <div class="stat-icon">🚚</div>
+                                <div class="stat-label">Today's Deliveries</div>
+                                <div class="stat-value">8</div>
+                                <button class="stat-button" onclick="goToScreen(&#39;deliveryScreen&#39;)">Start</button>
+                            </div>
+                            <div class="stat-card stat-card-warning">
+                                <div class="stat-icon">⏳</div>
+                                <div class="stat-label">Pending Tasks</div>
+                                <div class="stat-value">3</div>
+                                <button class="stat-button">View</button>
+                            </div>
+                        </div>
+
+                        <div class="submissions-section">
+                            <h2 class="section-title">Recent Submissions</h2>
+                            <table class="submissions-table">
+                                <thead>
+                                    <tr>
+                                        <th>Barcode</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>POD-2024-001247</td>
+                                        <td>Delivery</td>
+                                        <td><span class="status-badge status-completed">Completed</span></td>
+                                        <td>10:30 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>POD-2024-001246</td>
+                                        <td>Pickup</td>
+                                        <td><span class="status-badge status-completed">Completed</span></td>
+                                        <td>09:45 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>POD-2024-001245</td>
+                                        <td>Delivery</td>
+                                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                                        <td>09:15 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>POD-2024-001244</td>
+                                        <td>Pickup</td>
+                                        <td><span class="status-badge status-pending">Pending</span></td>
+                                        <td>08:30 AM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="action-buttons">
+                                <button class="action-btn" onclick="goToScreen(&#39;dailySubmissionsScreen&#39;)">
+                                    <span>📊</span> View All Submissions
+                                </button>
+                                <button class="action-btn" onclick="goToScreen(&#39;barcodeSearchScreen&#39;)">
+                                    <span>🔍</span> Search Barcode
+                                </button>
+                                <button class="action-btn" onclick="goToScreen(&#39;analyticsScreen&#39;)">
+                                    <span>📈</span> Analytics
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 4: Pickup -->
+                <div class="screen" id="pickupScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Pickup</h1>
+                        <p class="page-subtitle">Scan barcode on shipping instruction</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="scanner-box">📷<div class="scan-text">Scan QR Code</div></div>
+                        <div class="error-text">Unable to Scan?</div>
+                        <div class="help-text">Enter code below to continue</div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Enter Code here">
+                        </div>
+                        <div class="photo-section">
+                            <div class="photo-label">Upload Pictures (2)<span>✓</span></div>
+                            <div class="photo-grid">
+                                <div class="photo-box">📷</div>
+                                <div class="photo-box">📷</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Remarks</label>
+                            <textarea placeholder="Note any damages or other remarks..."></textarea>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="goToScreen(&#39;dashboardScreen&#39;)">✓ Completed</button>
+                            <button class="btn btn-secondary" onclick="goToScreen(&#39;dashboardScreen&#39;)">Back to Dashboard</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 5: Delivery -->
+                <div class="screen" id="deliveryScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Delivery</h1>
+                        <p class="page-subtitle">Scan barcode on shipping instruction</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="scanner-box">📷<div class="scan-text">Scan QR Code</div></div>
+                        <div class="error-text">Unable to Scan?</div>
+                        <div class="help-text">Enter code below to continue</div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Enter Code here">
+                        </div>
+                        <div class="photo-section">
+                            <div class="photo-label">Upload Pictures (2)<span>✓</span></div>
+                            <div class="photo-grid">
+                                <div class="photo-box">📷</div>
+                                <div class="photo-box">📷</div>
+                            </div>
+                        </div>
+                        <div class="photo-section">
+                            <div class="photo-label">Upload Signature (1)<span>✓</span></div>
+                            <div class="photo-grid">
+                                <div class="photo-box">✍️</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Remarks</label>
+                            <textarea placeholder="Note any damages or other remarks..."></textarea>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="goToScreen(&#39;dashboardScreen&#39;)">✓ Completed</button>
+                            <button class="btn btn-secondary" onclick="goToScreen(&#39;dashboardScreen&#39;)">Back to Dashboard</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 7: Daily Submissions -->
+                <div class="screen" id="dailySubmissionsScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Daily Submissions</h1>
+                        <p class="page-subtitle">View today's submissions and details</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#SUB001</td>
+                                        <td><span class="badge success">Completed</span></td>
+                                        <td>Today, 9:30 AM</td>
+                                        <td><button class="btn-small" onclick="goToScreen(&#39;submissionDetailsScreen&#39;)">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#SUB002</td>
+                                        <td><span class="badge pending">Pending</span></td>
+                                        <td>Today, 10:15 AM</td>
+                                        <td><button class="btn-small" onclick="goToScreen(&#39;submissionDetailsScreen&#39;)">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#SUB003</td>
+                                        <td><span class="badge success">Completed</span></td>
+                                        <td>Today, 11:00 AM</td>
+                                        <td><button class="btn-small" onclick="goToScreen(&#39;submissionDetailsScreen&#39;)">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary" onclick="goToScreen(&#39;dashboardScreen&#39;)">Back</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 8: Submission Details -->
+                <div class="screen" id="submissionDetailsScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Submission Details</h1>
+                        <p class="page-subtitle">Complete information of submission #SUB001</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Submission ID</label>
+                                <p>#SUB001</p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Status</label>
+                                <p><span class="badge success">Completed</span></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Submitted Date</label>
+                                <p>May 22, 2024 - 9:30 AM</p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Location</label>
+                                <p>Bengaluru, Karnataka</p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Recipient Name</label>
+                                <p>John Doe</p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Recipient Phone</label>
+                                <p>+91 9876543210</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Photos</label>
+                            <div class="photo-grid">
+                                <div class="photo-box">📷</div>
+                                <div class="photo-box">📷</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Remarks</label>
+                            <p class="remarks-text">Package delivered successfully. Recipient was not available, package left with neighbor.</p>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary" onclick="goToScreen(&#39;dailySubmissionsScreen&#39;)">Back</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 9: Analytics -->
+                <div class="screen" id="analyticsScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Analytics</h1>
+                        <p class="page-subtitle">Dashboard performance and metrics</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="analytics-grid">
+                            <div class="analytics-card">
+                                <div class="analytics-label">Total Submissions</div>
+                                <div class="analytics-value">2,456</div>
+                                <div class="analytics-change">↑ 12% from last week</div>
+                            </div>
+                            <div class="analytics-card">
+                                <div class="analytics-label">On-Time Deliveries</div>
+                                <div class="analytics-value">98.5%</div>
+                                <div class="analytics-change">↑ 2.3% from last week</div>
+                            </div>
+                            <div class="analytics-card">
+                                <div class="analytics-label">Avg. Completion Time</div>
+                                <div class="analytics-value">2h 14m</div>
+                                <div class="analytics-change">↓ 15min from last week</div>
+                            </div>
+                            <div class="analytics-card">
+                                <div class="analytics-label">Customer Satisfaction</div>
+                                <div class="analytics-value">4.8/5</div>
+                                <div class="analytics-change">↑ 0.3 from last week</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary" onclick="goToScreen(&#39;dashboardScreen&#39;)">Back</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 10: Barcode Search -->
+                <div class="screen" id="barcodeSearchScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Search Submission</h1>
+                        <p class="page-subtitle">Find submission by barcode</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label class="form-label">Enter Barcode</label>
+                            <input type="text" class="form-input" placeholder="e.g., 123456789" id="barcodeInput">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Search Type</label>
+                            <select class="form-input">
+                                <option>Delivery Package</option>
+                                <option>Pickup Package</option>
+                                <option>Return Package</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
+                            <div class="status-chips">
+                                <button class="chip active">All</button>
+                                <button class="chip">Pending</button>
+                                <button class="chip">In Transit</button>
+                                <button class="chip">Delivered</button>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="searchBarcode()">Search</button>
+                            <button class="btn btn-secondary" onclick="goToScreen(&#39;dashboardScreen&#39;)">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 11: Pending Submissions -->
+                <div class="screen" id="pendingSubmissionsScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Pending Submissions</h1>
+                        <p class="page-subtitle">Items awaiting completion</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="pending-list">
+                            <div class="pending-item">
+                                <div class="pending-header">
+                                    <span class="pending-id">#PEN001</span>
+                                    <span class="pending-time">3 hours ago</span>
+                                </div>
+                                <p class="pending-detail">📍 Indiranagar, Bengaluru</p>
+                                <p class="pending-detail">👤 Rajesh Kumar</p>
+                                <div class="pending-actions">
+                                    <button class="btn-small primary" onclick="goToScreen(&#39;deliveryScreen&#39;)">Resume</button>
+                                    <button class="btn-small danger">Reassign</button>
+                                </div>
+                            </div>
+                            <div class="pending-item">
+                                <div class="pending-header">
+                                    <span class="pending-id">#PEN002</span>
+                                    <span class="pending-time">5 hours ago</span>
+                                </div>
+                                <p class="pending-detail">📍 Koramangala, Bengaluru</p>
+                                <p class="pending-detail">👤 Priya Singh</p>
+                                <div class="pending-actions">
+                                    <button class="btn-small primary" onclick="goToScreen(&#39;deliveryScreen&#39;)">Resume</button>
+                                    <button class="btn-small danger">Reassign</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary" onclick="goToScreen(&#39;dashboardScreen&#39;)">Back</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 12: Device Registration -->
+                <div class="screen" id="deviceRegistrationScreen">
+                    <div class="page-header">
+                        <h1 class="page-title">Register Device</h1>
+                        <p class="page-subtitle">Register your mobile device</p>
+                    </div>
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label class="form-label">Device Name</label>
+                            <input type="text" class="form-input" placeholder="e.g., My iPhone 13">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Device Type</label>
+                            <select class="form-input">
+                                <option>iPhone</option>
+                                <option>Android Phone</option>
+                                <option>Tablet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Operating System</label>
+                            <input type="text" class="form-input" placeholder="e.g., iOS 17.2" readonly="">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Device ID</label>
+                            <input type="text" class="form-input" placeholder="Auto-generated" readonly="">
+                        </div>
+                        <div class="device-info">
+                            <h4>Device Information</h4>
+                            <p>📱 Brand: Apple</p>
+                            <p>🔧 Model: iPhone 13</p>
+                            <p>📍 Current Location: Bengaluru, Karnataka</p>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary">Register Device</button>
+                            <button class="btn btn-secondary" onclick="goToScreen(&#39;dashboardScreen&#39;)">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        </div>
+    </div>
+
+    <script>
+        // Initialize card mode for phone screen on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const mainContainer = document.querySelector('.main-container');
+            mainContainer.classList.add('card-mode');
+        });
+
+        // Initialize phone input validation only
+        window.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('phoneInput');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    // Only validate, don't auto-submit
+                    // User must click "Send Verification Code" button
+                });
+            }
+        });
+
+        function setupOTPInput() {
+            const boxes = document.querySelectorAll('#otpBoxes .otp-box');
+            boxes.forEach((box, index) => {
+                box.addEventListener('input', (e) => {
+                    // Only allow single digit
+                    if (e.target.value.length > 1) {
+                        e.target.value = e.target.value.slice(-1);
+                    }
+                    
+                    // Move to next box if filled
+                    if (e.target.value && index < boxes.length - 1) {
+                        boxes[index + 1].focus();
+                    }
+                });
+                
+                box.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        boxes[index - 1].focus();
+                    }
+                    
+                    // Allow selecting all text with Ctrl+A
+                    if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+                        e.target.select();
+                    }
+                });
+                
+                box.addEventListener('focus', (e) => {
+                    e.target.select();
+                });
+            });
+        }
+        
+        // Initialize OTP on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const otpScreen = document.getElementById('otpScreen');
+            if (otpScreen && otpScreen.classList.contains('active')) {
+                setupOTPInput();
+            }
+        });
+
+        function goToScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(s => {
+                s.classList.remove('active');
+            });
+            
+            // Show selected screen
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+            }
+            
+            // Toggle card mode for phone and OTP screens
+            const mainContent = document.querySelector('.main-content');
+            const mainWrapper = document.querySelector('.main-wrapper');
+            const mainContainer = document.querySelector('.main-container');
+            
+            if (screenId === 'phoneScreen' || screenId === 'otpScreen') {
+                mainContent.classList.add('card-mode');
+                mainWrapper.classList.add('card-mode');
+                mainContainer.classList.add('card-mode');
+            } else {
+                mainContent.classList.remove('card-mode');
+                mainWrapper.classList.remove('card-mode');
+                mainContainer.classList.remove('card-mode');
+            }
+            
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToOTP(e) {
+            e.preventDefault();
+            const phone = document.getElementById('phoneInput').value;
+            if (phone.length === 10) {
+                // Store phone number in session
+                sessionStorage.setItem('userPhone', phone);
+                goToScreen('otpScreen');
+                setupOTPInput();
+                startTimer();
+                
+                // Auto-verify OTP with default code 1234 after a short delay
+                setTimeout(() => {
+                    verifyOTP();
+                }, 500);
+            } else {
+                alert('Please enter a valid 10-digit phone number');
+                document.getElementById('phoneInput').focus();
+            }
+        }
+
+        function verifyOTP() {
+            const boxes = document.querySelectorAll('#otpBoxes .otp-box');
+            const otp = Array.from(boxes).map(b => b.value).join('');
+            
+            // Check if all 4 digits are entered
+            if (otp.length !== 4) {
+                alert('Please enter all 4 digits');
+                return;
+            }
+            
+            // Check if OTP is exactly 1234
+            if (otp === '1234') {
+                // Store user session
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('userVerified', 'true');
+                
+                document.getElementById('headerRight').classList.add('show');
+                // Show sidebar after verification
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.main-content');
+                sidebar.classList.add('show');
+                mainContent.classList.add('with-sidebar');
+                
+                // Automatically navigate to dashboard
+                setTimeout(() => {
+                    goToScreen('dashboardScreen');
+                }, 300);
+            } else {
+                // Invalid OTP
+                alert('Invalid OTP. Please enter the correct code (1234)');
+                // Clear boxes
+                boxes.forEach(box => box.value = '');
+                boxes[0].focus();
+            }
+        }
+
+        function startTimer() {
+            let time = 45;
+            const timerEl = document.getElementById('timer');
+            setInterval(() => {
+                if (time > 0) {
+                    time--;
+                    timerEl.textContent = time;
+                }
+            }, 1000);
+        }
+
+        function resendOTP(e) {
+            e.preventDefault();
+            alert('OTP resent successfully');
+            startTimer();
+        }
+
+        function logout() {
+            // Clear all session data
+            sessionStorage.clear();
+            localStorage.clear();
+            
+            // Clear form data
+            document.getElementById('phoneInput').value = '';
+            document.querySelectorAll('.otp-box').forEach(b => b.value = '');
+            
+            // Hide sidebar and header right
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            const headerRight = document.getElementById('headerRight');
+            
+            sidebar.classList.remove('show');
+            mainContent.classList.remove('with-sidebar');
+            headerRight.classList.remove('show');
+            
+            // Navigate to phone screen
+            goToScreen('phoneScreen');
+            
+            // Focus on phone input
+            setTimeout(() => {
+                document.getElementById('phoneInput').focus();
+            }, 300);
+        }
+
+        function searchBarcode() {
+            const barcode = document.getElementById('barcodeInput').value;
+            if (barcode.length > 0) {
+                alert('Searching for barcode: ' + barcode);
+                goToScreen('submissionDetailsScreen');
+            } else {
+                alert('Please enter a barcode');
+            }
+        }
+
+        function setActiveMenu(element) {
+            // Remove active class from all sidebar items
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            // Add active class to clicked item
+            element.classList.add('active');
+        }
+    </script>
+
+
+
+
+</body></html>
